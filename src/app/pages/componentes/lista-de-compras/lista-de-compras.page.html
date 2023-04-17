@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title >Suas Tarefas </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="tertiary">
+  <ion-list >
+    <ion-item *ngIf="tarefa1.length < 1">
+      <ion-label class="Vazio">Não há tarefas</ion-label>
+
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of tarefa1;" class="Item_L">
+      <ion-item (click)="openActions(item)" color="tertiary" >
+        <ion-label>
+          <h3>{{item.tarefa}}</h3>
+          <p *ngIf="item.feito==false">Pendente</p>
+          <p *ngIf="item.feito==true">Realizado</p>
+          <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+            <ion-fab-button (click)="delete(item)" color="danger" size="small" class="Excluir">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-label>
+        <ion-icon slot="start" name="information-circle" color="danger" *ngIf="!item.feito"></ion-icon>
+        <ion-icon slot="start" name="checkmark-circle" color="success" *ngIf="item.feito"></ion-icon>
+      </ion-item>
+
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="showadd()" color="success">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
